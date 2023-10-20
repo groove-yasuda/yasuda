@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>No12社員情報更新</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		 <script type="text/javascript" th:src="@{/js/js_No.js}"></script>
+	</head>
+	<style>
+	.center{
+		text-align: center;
+	}
+	</style>
+<body onload="color1()">
+	<input type="hidden" id="id_red" th:value="${id_point}">
+	<input type="hidden" id="12" th:value="12">
+	<input type="hidden" id="name_red" th:value="${name_point}">
+	<form action="UPD_AFT" method="post" name="No">
+		社員情報更新画面　更新後<br> 更新する社員情報を入力して下さい<br><br>
+		
+		
+		<span th:if="${key03}">
+			<font color="red">
+  				<td th:text="${key040}"></td><br>
+  				<td th:text="${key041}"></td><br><br>
+  			</font>
+		</span> 
+
+
+		社員ID:<input type="text" name="syainID" id="syainID" onchange = "active('UPD_AFT')" th:value ="${after01}"><br>
+		社員IDをA001～Z999の間の半角英数字で入力して下さい<br>
+		＊社員IDは大文字のアルファベット+3桁の数字の組み合わせです(000の並びは使用できません)<br> <br>
+		社員名:<input type="text" name="syainNAME" id="syainNAME" onchange = "active('UPD_AFT')" th:value ="${after02}"><br>
+		社員名を255文字以内で入力して下さい<br>
+
+		<span th:if="${after01}">
+			<input type="hidden" name="beforeID" th:value= "${before01}" >
+			<input type="hidden" name="beforeNAME" th:value= "${before02}" >
+		</span> 
+		<span th:if="${after01 == null}">
+			<input type="hidden" name="beforeID" th:value= "${key01}" >
+			<input type="hidden" name="beforeNAME" th:value= "${key02}" >
+		</span>
+
+		<input type="button" value="更新" id="UPD_AFT" onclick="chg(this.id)" disabled>
+		更新後
+<br>
+			<input type="button" value="戻る" id="BF_BACK" onclick="chg(this.id)" >
+				</form>
+<br>
+	<form action="IDOU" method="post">
+		<input type="submit" value="メニュー画面へ戻る">
+	</form>
+	</body>
+</html>
