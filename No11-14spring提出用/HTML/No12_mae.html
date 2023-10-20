@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>No12社員情報更新</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<style>
+	.center{
+		text-align: center;
+	}
+	</style>
+		<input type="hidden" id="id_red" th:value= "${id_point}" onchange = "color1()">
+		<input type="hidden" id="name_red" th:value= "${name_point}"  onchange = "color2()">
+<body onload="color1();color2();modori()">
+	<script>
+	
+	function chg(id)
+    {
+ 	   document.No12.action = id;
+ 	   document.No12.submit();
+    }
+
+	function color1()
+    {
+		if(document.getElementById("id_red").value == "1")
+			{
+			document.getElementById("syainID").style.backgroundColor = "red";
+			}
+    }
+	function color2()
+    {
+		if(document.getElementById("name_red").value == "1")
+			{
+			document.getElementById("syainNAME").style.backgroundColor = "red";
+			}
+     }
+	function active()
+    {
+		//alert("a")
+		if(document.getElementById("syainID").value != "" &&
+				document.getElementById("syainNAME").value != "")
+			{
+			document.getElementById("UPDATE_mae").disabled = false;
+			}
+		else
+			{
+			document.getElementById("UPDATE_mae").disabled = true;
+			}
+ 	}
+
+   </script>
+	<form action="UPDATE_mae" method="post" name="No12">
+		社員情報更新画面<br> 更新したい情報を入力して下さい<br>
+		
+		
+		<span th:if="${key03}">
+			<font color="red">
+  				<td th:text="${key04}"></td><br>
+  				<td th:text="${key05}"></td><br><br>
+  			</font>
+		</span> 
+
+
+		社員ID:<input type="text" name="syainID" id="syainID" onchange = "active();insert_id()" th:value ="${key01}"><br>
+		社員IDをA001～Z999の間の半角英数字で入力して下さい<br>
+		＊社員IDは大文字のアルファベット+3桁の数字の組み合わせです(000の並びは使用できません)<br> <br>
+		社員名:<input type="text" name="syainNAME" id="syainNAME" onchange = "active();insert_name()" th:value ="${key02}"><br>
+		社員名を255文字以内で入力して下さい<br>
+
+		<input type="button" value="更新" id="UPDATE_mae" onclick="chg(this.id)" disabled>
+		更新前
+				<br>
+		<input type="hidden" name="kaesi" value="0">
+
+			<input type="button" value="戻る" id="IDOU" onclick="chg(this.id)" >
+				</form>
+<br>
+	<form action="IDOU" method="post">
+		<input type="submit" value="メニュー画面へ戻る">
+	</form>
+	</body>
+</html>
